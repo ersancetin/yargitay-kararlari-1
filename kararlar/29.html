@@ -3,15 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>E. 2023/4823 K. 2025/2608 – Yargıtay 4. HD</title>
+<title>2023/4823 E. / 2025/2608 K. – Yargıtay 4. HD Güncel Kararlar 2026/1</title>
 <link rel="stylesheet" href="../css/style.css">
 <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
 </head>
 <body>
 
-<header class="site-header site-header--compact">
-    <div class="site-header__emblem">T.C. Yargıtay 4. Hukuk Dairesi</div>
-    <h1 class="site-header__title">E. 2023/4823 &middot; K. 2025/2608</h1>
+<header class="site-header">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir"><i class="ph ph-moon"></i></button>
+    <div class="site-header__emblem">T.C. Yargıtay</div>
+    <h1 class="site-header__title">4. Hukuk Dairesi</h1>
+    <p class="site-header__sub">Güncel Kararlar Derlemesi &middot; 2026 / 1</p>
+    <p class="site-header__author">Düzenleyen: Ersan Çetin</p>
 </header>
 
 <main class="wrap">
@@ -26,9 +29,14 @@
         </div>
     </nav>
 
+    <div class="detail-kunye">
+        2023/4823 E. / 2025/2608 K. / 17.02.2025 T.
+        <br><a href="https://karararama.yargitay.gov.tr/getDokuman?id=1151753500" target="_blank" rel="noopener" class="detail-kunye__link"><i class="ph ph-arrow-square-out"></i> Yargıtay Karar Arama'da Görüntüle</a>
+    </div>
+
     <section class="detail-summary">
         <h2 class="detail-summary__konu">Tedavi ve Bakıcı Gideri Tazminatı – ZMSS Kapsamında Kusur Değerlendirmesi</h2>
-        <p class="detail-summary__ozet">Trafik kazasında yaralanan davacının ZMSS teminatı kapsamında sürekli iş göremezlik, tedavi gideri ve bakıcı gideri tazminatı talebidir. Sigorta Tahkim Komisyonu İtiraz Hakem Heyeti kararında maluliyet oranının tespiti, taraflar arasındaki kusur dağılımı, aktüerya hesaplama yöntemi ve faiz başlangıç tarihinin belirlenmesi değerlendirilmiştir. Karar usul ve yasaya uygun bulunarak onanmıştır.</p>
+        <p class="detail-summary__ozet">Trafik kazasında yaralanan davacının ZMSS teminatı kapsamında sürekli iş göremezlik, tedavi gideri ve bakıcı gideri tazminatı talebidir. Sigorta Tahkim Komisyonu İtiraz Hakem Heyeti kararında maluliyet oranının tespiti, taraflar arasındaki kusur dağılımı, aktüerya hesaplama yöntemi ve faiz başlangıç tarihinin belirlenmesi değerlendirilmiştir. Hesaplama hatası ve eksik değerlendirme gerekçesiyle karar bozulmuştur.</p>
     </section>
 
     <div class="detail-meta">
@@ -42,11 +50,11 @@
         </div>
         <div class="meta-cell">
             <div class="meta-cell__label">Karar Tarihi</div>
-            <div class="meta-cell__value">19.02.2025</div>
+            <div class="meta-cell__value">17.02.2025</div>
         </div>
         <div class="meta-cell">
             <div class="meta-cell__label">Sonuç</div>
-            <div class="meta-cell__value"><span class="sonuc sonuc--onama">Onama</span></div>
+            <div class="meta-cell__value"><span class="sonuc sonuc--bozma">Bozma</span></div>
         </div>
     </div>
 
@@ -101,7 +109,34 @@
 </main>
 
 <footer class="site-footer">
-    Bu derleme bilgilendirme amaçlıdır. Resmî karar metinleri için Yargıtay kaynaklarına başvurunuz.
+    Hazırlayan: Av. Ersan Çetin &middot; Kaynak: karararama.yargitay.gov.tr
 </footer>
+<script>
+(function(){
+  var t = localStorage.getItem('theme');
+  if(t) document.documentElement.setAttribute('data-theme',t);
+  else if(window.matchMedia('(prefers-color-scheme:dark)').matches)
+    document.documentElement.setAttribute('data-theme','dark');
+})();
+function toggleTheme(){
+  var d = document.documentElement;
+  var current = d.getAttribute('data-theme');
+  var next = current==='dark'?'light':'dark';
+  d.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  updateIcon(next);
+}
+function updateIcon(theme){
+  var btn = document.querySelector('.theme-toggle');
+  if(!btn) return;
+  btn.innerHTML = theme==='dark'
+    ? '<i class="ph ph-sun"></i>'
+    : '<i class="ph ph-moon"></i>';
+}
+document.addEventListener('DOMContentLoaded',function(){
+  var theme = document.documentElement.getAttribute('data-theme')||'light';
+  updateIcon(theme);
+});
+</script>
 </body>
 </html>
