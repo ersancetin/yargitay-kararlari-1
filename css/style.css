@@ -223,6 +223,7 @@ a:hover { text-decoration: underline; }
   border-bottom: 1px solid var(--border);
   padding: 2rem 0 2rem 3rem;
   position: relative;
+  transition: opacity .3s ease, transform .3s ease;
 }
 
 .karar:last-child { border-bottom: none; }
@@ -496,6 +497,8 @@ a:hover { text-decoration: underline; }
 
 /* ── RESPONSIVE: TABLET ── */
 @media (max-width: 768px) {
+  .page-layout { flex-direction: column; }
+
   .site-header { padding: 2rem 1.5rem 1.5rem; }
   .site-header__title { font-size: 1.6rem; }
   .detail-kunye { font-size: .72rem; }
@@ -592,6 +595,275 @@ a:hover { text-decoration: underline; }
   .karar__ref { font-size: .58rem; }
   .karar__konu { font-size: .92rem; }
   .filters__btn { font-size: .6rem; padding: .2rem .45rem; }
+}
+
+/* ── SIDEBAR & PAGE LAYOUT ── */
+.sidebar-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  width: 100%;
+  padding: .65rem 1rem;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-muted);
+  font-family: var(--sans);
+  font-size: .75rem;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: .04em;
+  transition: color .15s ease;
+}
+
+.sidebar-toggle:hover { color: var(--text-primary); }
+
+.page-layout {
+  display: flex;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.page-layout .wrap {
+  max-width: none;
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border);
+  padding: 2rem 1.25rem;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border); }
+
+.sidebar__title {
+  font-family: var(--serif);
+  font-size: .8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: .02em;
+  margin-bottom: 1.25rem;
+  padding-bottom: .5rem;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.sidebar__reset {
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+  width: 100%;
+  padding: .35rem .4rem;
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  font-family: var(--sans);
+  font-size: .7rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: .75rem;
+  letter-spacing: .02em;
+}
+
+.sidebar__reset:hover { color: var(--text-primary); }
+
+.sidebar__group { margin-bottom: 1.25rem; }
+
+.sidebar__heading {
+  font-family: var(--serif);
+  font-size: .65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--text-faint);
+  margin-bottom: .4rem;
+  padding-bottom: .25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: .25rem .4rem;
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  font-family: var(--sans);
+  font-size: .72rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all .15s ease;
+  text-align: left;
+  letter-spacing: .01em;
+}
+
+.sidebar__item:hover { color: var(--text-primary); }
+
+.sidebar__item.active {
+  color: var(--text-primary);
+  font-weight: 600;
+  border-left: 2px solid var(--text-primary);
+  padding-left: calc(.4rem - 2px);
+}
+
+.sidebar__count {
+  font-size: .6rem;
+  color: var(--text-ghost);
+  font-weight: 500;
+  min-width: 1.2rem;
+  text-align: right;
+}
+
+.sidebar__item.active .sidebar__count { color: var(--text-faint); }
+
+.sidebar__item.hidden {
+  display: none;
+}
+
+/* ── ACTIVE FILTER CHIPS ── */
+.sidebar__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem;
+  margin-bottom: .75rem;
+}
+
+.active-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+  font-family: var(--sans);
+  font-size: .65rem;
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--text-primary);
+  padding: .2rem .5rem;
+  cursor: pointer;
+  transition: opacity .15s ease;
+  letter-spacing: .02em;
+}
+
+.active-chip:hover {
+  opacity: .75;
+}
+
+.active-chip i {
+  font-size: .55rem;
+  line-height: 1;
+}
+
+.sidebar__result-count {
+  font-family: var(--sans);
+  font-size: .68rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding: .4rem .5rem;
+  margin-bottom: .75rem;
+  border: 1px solid var(--text-primary);
+  text-align: center;
+  letter-spacing: .02em;
+}
+
+/* ── SIDEBAR OVERLAY & CLOSE (desktop hidden) ── */
+.sidebar-overlay {
+  display: none;
+}
+
+.sidebar__close {
+  display: none;
+}
+
+/* ── MOBILE BOTTOM SHEET (must come AFTER base sidebar styles) ── */
+@media (max-width: 768px) {
+  .sidebar-toggle {
+    display: flex;
+  }
+
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    z-index: 99;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .35s cubic-bezier(.4,0,.2,1);
+  }
+  .sidebar-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-right: none;
+    border-top: 1px solid var(--border);
+    border-bottom: none;
+    background: var(--bg);
+    z-index: 100;
+    padding: 1rem 1rem 2rem;
+    align-self: auto;
+    transform: translateY(100%);
+    transition: transform .35s cubic-bezier(.4,0,.2,1);
+  }
+  .sidebar.open {
+    transform: translateY(0);
+  }
+
+  .sidebar__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: .75rem;
+    right: .75rem;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    cursor: pointer;
+    z-index: 1;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .sidebar__close:hover {
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+  }
+
+  .sidebar__item {
+    min-height: 44px;
+  }
+}
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  .karar {
+    transition: none;
+  }
+  .sidebar {
+    transition: none;
+  }
 }
 
 /* ── PRINT ── */
