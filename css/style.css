@@ -295,8 +295,7 @@ a:hover { text-decoration: underline; }
 .karar__foot {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
+  align-items: flex-end;
   gap: .75rem;
 }
 
@@ -304,6 +303,12 @@ a:hover { text-decoration: underline; }
   display: flex;
   flex-wrap: wrap;
   gap: .35rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.karar__foot .btn {
+  flex-shrink: 0;
 }
 
 .tag {
@@ -558,7 +563,8 @@ a:hover { text-decoration: underline; }
 
   .sonuc { font-size: .6rem; align-self: flex-start; }
 
-  .karar__foot { flex-direction: column; align-items: flex-start; gap: .5rem; }
+  .karar__foot { flex-wrap: wrap; align-items: flex-end; gap: .5rem; }
+  .karar__foot .btn { margin-left: auto; }
   .tag { font-size: .6rem; }
   .btn { font-size: .72rem; padding: .4rem .8rem; }
 
