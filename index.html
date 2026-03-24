@@ -3727,17 +3727,11 @@ function applyFilters() {
       tagMatch = activeTags.every(function(t) { return tags.indexOf(t) > -1; });
     }
     var shouldShow = sonucMatch && tagMatch;
-
-    if (showAll || reducedMotion) {
-      c.style.display = shouldShow ? '' : 'none';
-      c.style.opacity = '';
-      c.style.transform = '';
-      return;
-    }
+    var wasHidden = c.style.display === 'none';
 
     if (shouldShow) {
-      if (c.style.display === 'none' || c.dataset.hidden === '1') {
-        c.style.display = '';
+      c.style.display = '';
+      if (wasHidden && !showAll && !reducedMotion) {
         c.style.opacity = '0';
         c.style.transform = 'translateY(12px)';
         var d = delay;
@@ -3746,15 +3740,14 @@ function applyFilters() {
           c.style.opacity = '1';
           c.style.transform = 'translateY(0)';
         }, d);
+      } else {
+        c.style.opacity = '';
+        c.style.transform = '';
       }
-      c.dataset.hidden = '0';
     } else {
-      if (c.style.display !== 'none' && c.dataset.hidden !== '1') {
-        c.style.opacity = '0';
-        c.style.transform = 'translateY(8px)';
-        c.dataset.hidden = '1';
-        setTimeout(function() { c.style.display = 'none'; }, 300);
-      }
+      c.style.display = 'none';
+      c.style.opacity = '';
+      c.style.transform = '';
     }
   });
 }
